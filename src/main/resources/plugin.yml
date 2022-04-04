@@ -1,0 +1,7 @@
+name: AfkUnscramble
+version: '${project.version}'
+main: me.grovre.afkunscramble.AfkUnscramble
+api-version: 1.18
+authors: [ PoptartFromPluto ]
+description: Prompts players to unscramble a word if they haven't moved in a set amount of time
+website: https://github.com/grovre
