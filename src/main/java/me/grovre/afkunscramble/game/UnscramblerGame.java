@@ -14,8 +14,8 @@ public class UnscramblerGame {
 
     private String word;
     private String scrambledWord;
-    private WordHints hints;
-    private Player player;
+    private final WordHints hints;
+    private final Player player;
 
     public UnscramblerGame(Player player) {
         try {
@@ -38,11 +38,12 @@ public class UnscramblerGame {
                 + ChatColor.YELLOW + scrambledWord);
     }
 
-    public void makeUnscrambleAttempt(Player player, String attempt) {
+    public void makeUnscrambleAttempt(String attempt) {
         attempt = attempt.toLowerCase();
         if(attempt.equals(word)) {
             playersWithGames.remove(player);
             AfkUnscrambleAPI.restartAfkTimer(player);
+            player.sendMessage(ChatColor.GREEN + "Nice");
             return;
         }
         player.sendMessage(ChatColor.RED + "Incorrect guess.");

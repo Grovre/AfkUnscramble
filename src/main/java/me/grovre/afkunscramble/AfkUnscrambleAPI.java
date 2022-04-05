@@ -62,7 +62,7 @@ public class AfkUnscrambleAPI {
         }
 
         BufferedReader br = new BufferedReader(new FileReader(wordFile));
-        String word = br.lines().findAny().orElse("supercalifragilisticexpialidocious");
+        String word = br.lines().findAny().orElse("supercalifragilisticexpialidocious"); // aww shiiiiit
 
         return word.toLowerCase();
     }
@@ -107,5 +107,15 @@ public class AfkUnscrambleAPI {
             promptTask.cancel();
         }
         startAfk(uuid);
+    }
+
+    public static UnscramblerGame getPlayerUnscramblerGame(Player player) {
+        return UnscramblerGame.playersWithGames.get(player);
+    }
+
+    public static UnscramblerGame getPlayerUnscramblerGame(UUID uuid) {
+        Player player = Bukkit.getPlayer(uuid);
+        assert player != null;
+        return getPlayerUnscramblerGame(player);
     }
 }

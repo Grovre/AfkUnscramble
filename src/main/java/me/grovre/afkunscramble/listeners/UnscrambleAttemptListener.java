@@ -1,6 +1,7 @@
 package me.grovre.afkunscramble.listeners;
 
 import me.grovre.afkunscramble.AfkUnscrambleAPI;
+import me.grovre.afkunscramble.game.UnscramblerGame;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,6 +14,7 @@ public class UnscrambleAttemptListener implements Listener {
         Player player = event.getPlayer();
         if(!AfkUnscrambleAPI.playerHasPrompt(player)) return;
 
-
+        String message = event.getMessage();
+        AfkUnscrambleAPI.getPlayerUnscramblerGame(player);
     }
 }

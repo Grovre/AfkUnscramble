@@ -12,6 +12,7 @@ public final class AfkUnscramble extends JavaPlugin {
         // Plugin startup logic
         plugin = this;
         saveDefaultConfig();
+        saveResource("possibleWords.txt", false);
 
         // TODO: 4/4/22 Save word list as resource 
         // TODO: 4/4/22 Refactor to work on a timer instead of player movement

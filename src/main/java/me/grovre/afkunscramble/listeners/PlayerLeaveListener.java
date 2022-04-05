@@ -1,5 +1,6 @@
 package me.grovre.afkunscramble.listeners;
 
+import me.grovre.afkunscramble.AfkUnscramble;
 import me.grovre.afkunscramble.AfkUnscrambleAPI;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -24,6 +25,8 @@ public class PlayerLeaveListener implements Listener {
 
     private void removeFromAfkList(Player player) {
         UUID uuid = player.getUniqueId();
-        AfkUnscrambleAPI.playerAfkTasks.remove(uuid);
+        try {
+            AfkUnscrambleAPI.playerAfkTasks.remove(uuid).cancel();
+        } catch (Exception ignored) {}
     }
 }
