@@ -4,3 +4,5 @@ KickMessage: "You were AFK for too long."
 
 OfferHints: true # Offers hints in case someone really was not afk
 LettersRevealedPerHint: 1 # How many letters are revealed in place every hint. Only works if above is true
+
+debug: true # Whether to print debugs in console or not

@@ -2,6 +2,7 @@ package me.grovre.afkunscramble.game;
 
 import me.grovre.afkunscramble.AfkUnscramble;
 import me.grovre.afkunscramble.AfkUnscrambleAPI;
+import me.grovre.afkunscramble.Log;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -36,6 +37,8 @@ public class UnscramblerGame {
                 + ((int) (secondsToUnscramble/1000))
                 + " seconds to unscramble the word: "
                 + ChatColor.YELLOW + scrambledWord);
+
+        new Log("Unscramble game started: " + player.getName());
     }
 
     public void makeUnscrambleAttempt(String attempt) {
@@ -44,6 +47,7 @@ public class UnscramblerGame {
             playersWithGames.remove(player);
             AfkUnscrambleAPI.restartAfkTimer(player);
             player.sendMessage(ChatColor.GREEN + "Nice");
+            new Log("Successful unscramble attempt: " + player.getName());
             return;
         }
         player.sendMessage(ChatColor.RED + "Incorrect guess.");
@@ -51,9 +55,11 @@ public class UnscramblerGame {
             int lettersToReveal = AfkUnscramble.plugin.getConfig().getInt("LettersRevealedPerHint");
             giveHint(lettersToReveal);
         }
+        new Log("Unsuccessful unscramble attempt: " + player.getName());
     }
 
     public String giveHint(int amountOfLettersToGive) {
+        new Log("Hint given: " + player.getName());
         return hints.progressHints(amountOfLettersToGive);
     }
 }

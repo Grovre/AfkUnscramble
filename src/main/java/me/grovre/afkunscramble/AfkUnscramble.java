@@ -14,19 +14,22 @@ public final class AfkUnscramble extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
+        new Log("Plugin init");
         plugin = this;
         saveDefaultConfig();
         saveResource("possibleWords.txt", false);
 
+        new Log("Registering events");
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new PlayerJoinListener(), this);
         pm.registerEvents(new PlayerLeaveListener(), this);
         pm.registerEvents(new UnscrambleAttemptListener(), this);
+        new Log("Plugin enabled");
     }
 
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-        System.out.println("Goodbye world");
+        new Log("Plugin disabled");
     }
 }

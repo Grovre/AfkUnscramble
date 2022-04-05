@@ -26,6 +26,8 @@ public class AfkUnscrambleAPI {
         );
 
         playerAfkTasks.put(uuid, countdownTask);
+
+        new Log("Afk timer started");
     }
 
     public static void promptAfkUnscramble(UUID uuid) {
@@ -43,6 +45,8 @@ public class AfkUnscrambleAPI {
 
         new UnscramblerGame(player);
         playerAfkTasks.put(uuid, promptedCountdownTask);
+
+        new Log("UUID prompted with afk unscramble: " + uuid);
     }
 
     public static void promptFailed(UUID uuid, String kickMessage) {
@@ -51,6 +55,8 @@ public class AfkUnscrambleAPI {
 
         player.kickPlayer(kickMessage);
         playerAfkTasks.remove(uuid);
+
+        new Log("Player failed prompt: " + player.getName() + "(" + uuid + ")");
     }
 
     @Nonnull
@@ -64,6 +70,7 @@ public class AfkUnscrambleAPI {
         BufferedReader br = new BufferedReader(new FileReader(wordFile));
         String word = br.lines().findAny().orElse("supercalifragilisticexpialidocious"); // aww shiiiiit
 
+        new Log("Random word retrieved: " + word);
         return word.toLowerCase();
     }
 
@@ -83,7 +90,9 @@ public class AfkUnscrambleAPI {
             chars[i] = temp;
         }
 
-        return new String(chars);
+        String scrambled = new String(chars);
+        new Log("String \"" + str + "\" was scrambled: " + scrambled);
+        return scrambled;
     }
 
     public static boolean playerHasPrompt(UUID uuid) {
@@ -93,6 +102,7 @@ public class AfkUnscrambleAPI {
     }
 
     public static boolean playerHasPrompt(Player player) {
+        new Log("Checking player for prompt status: " + player.getName());
         return UnscramblerGame.playersWithGames.containsKey(player);
     }
 
@@ -107,6 +117,7 @@ public class AfkUnscrambleAPI {
             promptTask.cancel();
         }
         startAfk(uuid);
+        new Log("Afk timer restarted: " + uuid);
     }
 
     public static UnscramblerGame getPlayerUnscramblerGame(Player player) {
@@ -116,6 +127,7 @@ public class AfkUnscrambleAPI {
     public static UnscramblerGame getPlayerUnscramblerGame(UUID uuid) {
         Player player = Bukkit.getPlayer(uuid);
         assert player != null;
+        new Log("Scramble game retrieved: " + uuid);
         return getPlayerUnscramblerGame(player);
     }
 }

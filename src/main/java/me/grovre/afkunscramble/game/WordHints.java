@@ -1,5 +1,7 @@
 package me.grovre.afkunscramble.game;
 
+import me.grovre.afkunscramble.Log;
+
 import java.util.Arrays;
 import java.util.Random;
 
@@ -14,6 +16,7 @@ public class WordHints {
         wordChars = str.toCharArray();
         hintedWordChars = new char[wordChars.length];
         Arrays.fill(hintedWordChars, '_');
+        new Log("Hints init");
     }
 
     public WordHints(char[] chars) {
@@ -21,11 +24,13 @@ public class WordHints {
         wordChars = chars;
         hintedWordChars = new char[wordChars.length];
         Arrays.fill(hintedWordChars, '_');
+        new Log("Hints init");
     }
 
     public void resetHintProgress() {
         Arrays.fill(hintStatus, false);
         Arrays.fill(hintedWordChars, '_');
+        new Log("Hint progress reset: " + this);
     }
 
     public String progressHints(int count) {
@@ -39,19 +44,23 @@ public class WordHints {
         } while(hintStatus[nextIndexToReveal]);
         hintedWordChars[nextIndexToReveal] = wordChars[nextIndexToReveal];
 
+        new Log("Hints progressed by 1: " + this);
         return progressHints(count-1);
     }
 
     public String getHintedChars() {
+        new Log("Hinted chars received: " + this);
         return new String(hintedWordChars);
     }
 
     public boolean hasGivenAllHints() {
         for(boolean b : hintStatus) {
             if(!b) {
+                new Log("Has given all hints: " + this);
                 return false;
             }
         }
+        new Log("Has not given all hints: " + this);
         return true;
     }
 }
