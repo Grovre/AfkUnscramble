@@ -24,6 +24,19 @@ public class Log {
         );
     }
 
+    public void cleanLogs() {
+        if(logs.size() > 100) {
+            if(debug) {
+                try {
+                    exportLogs();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            logs.clear();
+        }
+    }
+
     public static void exportLogs() throws IOException {
         File logFile = new File(AfkUnscramble.plugin.getDataFolder().getAbsolutePath() + "logs.txt");
         BufferedWriter bw = new BufferedWriter(new FileWriter(logFile, false));
