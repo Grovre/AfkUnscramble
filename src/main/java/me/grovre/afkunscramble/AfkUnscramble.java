@@ -7,6 +7,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.IOException;
+
 public final class AfkUnscramble extends JavaPlugin {
 
     public static AfkUnscramble plugin;
@@ -14,6 +16,11 @@ public final class AfkUnscramble extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
+        try {
+            Log.loggerInit();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         new Log("Plugin init");
         plugin = this;
         saveDefaultConfig();
@@ -31,5 +38,10 @@ public final class AfkUnscramble extends JavaPlugin {
     public void onDisable() {
         // Plugin shutdown logic
         new Log("Plugin disabled");
+        try {
+            Log.loggerClose();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
